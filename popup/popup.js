@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.log("no chrome && chrome.tabs");
     }
-    document.getElementById("form").addEventListener('submit', function() {
+    document.getElementById("form").addEventListener('submit', function(e) {
+        e.preventDefault();
         const req = new XMLHttpRequest();
         req.timeout = 60 * 1000; // milliseconds
         req.open('POST', apiEndpoint, true);
@@ -30,6 +31,12 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 alert("Sorry, error submitting sentence. Code: " + req.status);
             }
+        };
+        req.onerror = function() {
+            alert("Sorry, error submitting sentence to " + apiEndpoint);
+        };
+        req.ontimeout = function() {
+            alert("Sorry, error submitting sentence to " + apiEndpoint);
         };
         req.onreadystatechange = function() {
             //console.log("onreadystatechange", req.status, req.readyState);
@@ -43,5 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
             "&correction=" + encodeURIComponent(document.getElementById("correctedText").value) +
             "&url=" + encodeURIComponent(document.getElementById("url").value)
         );
+        return false;
     });
 });

@@ -10,8 +10,11 @@
 </head>
 <body>
 
-<!--<form id="form" method="POST" action="http://localhost:8000/submitErrorExample">-->
-<!--<form id="form" method="POST" action="https://languagetoolplus.com/submitErrorExample">-->
+<h1>Error Collector</h1>
+
+<p>Found an error in a text? Please submit the complete incorrect sentence and its correction. We're especially
+    interested in grammar errors, confused words, and content errors that you think a software could detect.</p>
+
 <form id="form">
     <table>
         <!--
@@ -35,7 +38,7 @@
             <td></td>
         </tr>
         <tr>
-            <td class="text">Text:</td>
+            <td class="text">Sentence:</td>
             <td><input id="origText" name="origText"></td>
         </tr>
         <tr>
@@ -48,10 +51,12 @@
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit"></td>
+            <td><input type="submit" value="Submit error"></td>
         </tr>
     </table>
 </form>
+
+<p style="text-align: right"><a target="_blank" href="https://languagetool.org">powered by languagetool.org</a></p>
 
 </body>
 </html>

@@ -2,6 +2,15 @@ body {
     width: 700px;
 }
 
+h1 {
+    font-size: 14px;
+}
+
+p {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
 table {
   width: 100%; 
 }

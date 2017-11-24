@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Error Collector</title>
+    <link rel="stylesheet" type="text/css" href="popup.css">
+    <script src="popup.js"></script>
+</head>
+<body>
+
+<form id="form" method="POST" action="https://community.languagetool.org/">
+    <table>
+        <!--
+        <tr>
+            <td></td>
+            <td>
+                <span class="formDetail">Your account at languagetoolplus.com:</span>
+            </td>
+        </tr>
+        <tr>
+            <td class="text">User:</td>
+            <td><input type="email" id="user" name="user" required></td>
+        </tr>
+        <tr>
+            <td class="text">Password:</td>
+            <td><input type="password" id="password" name="password" required></td>
+        </tr>
+        -->
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="text">Text:</td>
+            <td><input id="origText" name="origText" disabled></td>
+        </tr>
+        <tr>
+            <td>Corrected:</td>
+            <td><input id="correctedText" name="correctedText" autofocus></td>
+        </tr>
+        <tr>
+            <td>Source:</td>
+            <td><input id="url" name="url" disabled></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit"></td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

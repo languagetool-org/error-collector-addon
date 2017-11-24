@@ -1,0 +1,18 @@
+body {
+    width: 700px;
+}
+
+table {
+  width: 100%; 
+}
+table .text {  
+  width: 70px;
+}
+input {
+  width: 100%; 
+}
+
+.formDetail {
+    font-size: 10px;
+    color: #666666;
+}

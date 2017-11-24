@@ -1,0 +1,28 @@
+{
+
+  "manifest_version": 2,
+  "name": "Error Collector",
+  "version": "1.0",
+
+  "description": "Lets the user collect text errors like grammar mistakes and typos",
+
+  "browser_action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Error Collector",
+    "browser_style": false
+  },
+
+  "permissions": [
+    "activeTab",
+    "storage",
+    "contextMenus"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["content.js"]
+    }
+  ]
+
+}

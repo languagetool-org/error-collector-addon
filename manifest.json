@@ -12,6 +12,7 @@
     "48": "images/icon48x48.png" },
 
   "browser_action": {
+    "default_icon": "images/icon16x16.png",
     "default_popup": "popup/popup.html",
     "default_title": "Error Collector",
     "browser_style": false

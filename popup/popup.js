@@ -22,10 +22,16 @@ const apiEndpoint = "https://languagetoolplus.com/submitErrorExample";
 
 function showText(tabs) {
     chrome.tabs.sendMessage(tabs[0].id, {action: 'getText'}, function(response) {
-        document.getElementById("origText").value = response;
-        document.getElementById("correctedText").value = response;
+        if (response) {
+            document.getElementById("origText").value = response;
+            document.getElementById("correctedText").value = response;
+            //document.getElementById("correctedText").focus();
+        } else {
+            document.getElementById("origText").placeholder = "text selected in page will appear here";
+            //document.getElementById("origText").focus();
+            document.getElementById("correctedText").placeholder = "a corrected version of the text above";
+        }
         document.getElementById("url").value = tabs[0].url;
-        console.log("tabs", tabs);
     });
 }
 

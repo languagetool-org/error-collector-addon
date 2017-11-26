@@ -36,6 +36,38 @@ function showText(tabs) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    
+    function showConfig() {
+        getStorage().get({
+            email: "",
+            password: ""
+        }, function(items) {
+            document.getElementById("config").style.display = "block";
+            document.getElementById("email").value = items.email;
+            document.getElementById("password").value = items.password;
+            document.getElementById("email").focus();
+            document.getElementById("main").style.display = "none";
+        });
+    }
+
+    function getStorage() {
+        return chrome.storage.sync ? chrome.storage.sync : chrome.storage.local;
+    }
+
+    function saveConfig() {
+        getStorage().set({
+            email: document.getElementById("email").value,
+            password: document.getElementById("password").value
+        }, function() {
+            hideConfig();
+        });
+    }
+    
+    function hideConfig() {
+        document.getElementById("config").style.display = "none";
+        document.getElementById("main").style.display = "block";
+    }
+    
     if (chrome && chrome.tabs) {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             showText(tabs);
@@ -43,6 +75,15 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.log("no chrome && chrome.tabs");
     }
+    
+    document.getElementById("submitConfig").addEventListener('click', function(e) {
+        saveConfig();
+    });
+    
+    document.getElementById("configLink").addEventListener('click', function(e) {
+        showConfig();
+    });
+    
     document.getElementById("form").addEventListener('submit', function(e) {
         e.preventDefault();
         const req = new XMLHttpRequest();
@@ -69,11 +110,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 self.close();
             }
         };
-        req.send(
-            "sentence=" + encodeURIComponent(document.getElementById("origText").value) +
-            "&correction=" + encodeURIComponent(document.getElementById("correctedText").value) +
-            "&url=" + encodeURIComponent(document.getElementById("url").value)
-        );
+        getStorage().get({
+            email: "",
+            password: ""
+        }, function(items) {
+            req.send(
+                "sentence=" + encodeURIComponent(document.getElementById("origText").value) +
+                "&correction=" + encodeURIComponent(document.getElementById("correctedText").value) +
+                "&url=" + encodeURIComponent(document.getElementById("url").value) +
+                "&username=" + encodeURIComponent(items.email) +
+                "&password=" + encodeURIComponent(items.password)
+            );
+        });
+
         return false;
     });
 });

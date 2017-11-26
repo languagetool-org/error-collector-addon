@@ -26,7 +26,9 @@ input {
     width: 100%;
 }
 
+input[type=submit] {
+    margin-top: 5px;
+}
+
 .formDetail {
-    font-size: 10px;
-    color: #666666;
 }

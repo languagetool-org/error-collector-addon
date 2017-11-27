@@ -36,6 +36,16 @@ function showText(tabs) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+
+    getStorage().get({
+        email: "",
+        password: ""
+    }, function(items) {
+        if (items.email === "") {
+            // force configuration
+            showConfig();
+        }
+    });
     
     function showConfig() {
         getStorage().get({

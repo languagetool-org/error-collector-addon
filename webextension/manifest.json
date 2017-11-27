@@ -41,6 +41,12 @@
       "matches": ["*://*/*"],
       "js": ["content.js"]
     }
-  ]
+  ],
+
+  "applications": {
+    "gecko": {
+      "id": "error-collector-webextension@languagetool.org"
+    }
+  }
 
 }

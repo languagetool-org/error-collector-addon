@@ -23,10 +23,24 @@ function handleRequest(request, sender, callback) {
     if (request.action === 'getText') {
         const selection = window.getSelection();
         if (selection && selection.toString() !== "") {
-            //console.log(">>" + selection.toString());
             callback(selection.toString());
         } else {
-            callback();
+            // Case for e.g. tinyMCE as used on languagetool.org (it's in an iframe)
+            let iframeSelection = "";
+            const iframes = document.getElementsByTagName("iframe");
+            for (let i = 0; i < iframes.length; i++) {
+                try {
+                    let sel = iframes[i].contentWindow.document.getSelection();
+                    if (sel && sel.toString() !== "") {
+                        iframeSelection = sel.toString();
+                        break;
+                    }
+                } catch(e) {
+                    // ignore - what else could we do here?
+                    console.log("Could not get selection", e);
+                }
+            }
+            callback(iframeSelection);
         }
     } else {
         alert(`Unknown action: ${request.action}`);

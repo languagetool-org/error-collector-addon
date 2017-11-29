@@ -53,10 +53,10 @@ document.addEventListener('DOMContentLoaded', function() {
             password: ""
         }, function(items) {
             document.getElementById("config").style.display = "block";
+            document.getElementById("main").style.display = "none";
             document.getElementById("email").value = items.email;
             document.getElementById("password").value = items.password;
             document.getElementById("email").focus();
-            document.getElementById("main").style.display = "none";
         });
     }
 

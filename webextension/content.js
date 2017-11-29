@@ -26,13 +26,13 @@ function handleRequest(request, sender, callback) {
             callback(selection.toString());
         } else {
             // Case for e.g. tinyMCE as used on languagetool.org (it's in an iframe)
-            let iframeSelection = "";
+            let newSelection = "";
             const iframes = document.getElementsByTagName("iframe");
             for (let i = 0; i < iframes.length; i++) {
                 try {
                     let sel = iframes[i].contentWindow.document.getSelection();
                     if (sel && sel.toString() !== "") {
-                        iframeSelection = sel.toString();
+                        newSelection = sel.toString();
                         break;
                     }
                 } catch(e) {
@@ -40,7 +40,19 @@ function handleRequest(request, sender, callback) {
                     console.log("Could not get selection", e);
                 }
             }
-            callback(iframeSelection);
+            if (newSelection === "") {
+                let selObj = document.activeElement;
+                if (selObj) {
+                    const objs = document.getElementsByName(selObj.name);
+                    for (let i = 0; i < objs.length; i++) {
+                        if (objs[i].selectionStart >= 0 && objs[i].selectionEnd >= 0) {
+                            newSelection = objs[i].value.substring(objs[i].selectionStart, objs[i].selectionEnd);
+                            break;
+                        }
+                    }
+                }
+            }
+            callback(newSelection);
         }
     } else {
         alert(`Unknown action: ${request.action}`);

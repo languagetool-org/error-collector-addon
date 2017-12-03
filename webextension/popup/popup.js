@@ -103,6 +103,8 @@ document.addEventListener('DOMContentLoaded', function() {
         req.onload = function() {
             if (req.status === 200) {
                 self.close();
+            } else if (req.status === 403) {
+                alert("Sorry, error submitting sentence. Please click 'Configuration' and make sure your languagetoolplus.com username and password are correct.");
             } else {
                 alert("Sorry, error submitting sentence. Code: " + req.status);
             }
